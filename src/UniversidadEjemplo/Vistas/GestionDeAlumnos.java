@@ -266,19 +266,20 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 //            }
         } catch (Exception e) {
             
-              String apellido = jtApellido.getText();
-                String nombre = jtNombre.getText();
+              alumPrincipa.setDni(Integer.parseInt(jtDni.getText());
+                alumPrincipa.setApellido( jtApellido.getText());
+                alumPrincipa.setNombre(jtNombre.getText());
 
-                LocalDate fechadeNac = jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                
+                alumPrincipa.setFechaNac(jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+
                 boolean estado = false;
-                        
                 if (jrbEstado.isSelected()) {
-                    estado=true;
+                    estado = true;
                 }
-                Alumno alumno1 = new Alumno(dni, apellido, nombre, fechadeNac, estado);
-
-                alumd.guardarAlumno(alumno1);
+                alumPrincipa.setActivo(estado);
+                
+                alumd.modificarAlumno(alumPrincipa);
+               
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
