@@ -24,16 +24,16 @@ public class UniversidadEjemplo {
     public static void main(String[] args) {
         // TODO code application logic here
         Conexion.getConexion();
-//        Alumno alum = new Alumno(234, "oap", "mf", LocalDate.of(2022, Month.MARCH, 12), false);
-//        AlumnoData alumd=new AlumnoData();
-//        alumd.guardarAlumno(alum);
+        Alumno alum = new Alumno(1, 12, "oap", "mf", LocalDate.of(2022, Month.MARCH, 12), false);
+        AlumnoData alumd=new AlumnoData();
+        alumd.modificarAlumno(alum);
         
-       Usuario usuario =new Usuario("calipto", "calipto722@gmail.com",1);
-        UsuarioData usuariodata= new UsuarioData();
-        usuariodata.verificarUsuario(usuario.getNombre());
-        String pas = "calipto722@gmail.com";
-        usuariodata.verificarPasswor(usuario, pas);
-        
+//       Usuario usuario =new Usuario("calipto", "calipto722@gmail.com",1);
+//        UsuarioData usuariodata= new UsuarioData();
+//        usuariodata.verificarUsuario(usuario.getNombre());
+//        String pas = "calipto722@gmail.com";
+//        usuariodata.verificarPasswor(usuario, pas);
+//        
     }
     
 }
