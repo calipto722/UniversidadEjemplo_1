@@ -26,7 +26,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         this.setTitle("Alumnos");
         jbEliminar.setEnabled(false);
     }
-    Alumno alumPrincipa=new Alumno();
+    Alumno alumPrincipa=null;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,7 +48,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jbBuscar = new javax.swing.JButton();
         jtDni = new javax.swing.JTextField();
         jtApellido = new javax.swing.JTextField();
-        jbNuevo = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
@@ -93,10 +93,10 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             }
         });
 
-        jbNuevo.setText("Limpiar");
-        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbNuevoActionPerformed(evt);
+                jbLimpiarActionPerformed(evt);
             }
         });
 
@@ -174,7 +174,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jbNuevo)
+                .addComponent(jbLimpiar)
                 .addGap(18, 18, 18)
                 .addComponent(jbEliminar)
                 .addGap(18, 18, 18)
@@ -214,7 +214,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                         .addComponent(jLabel6)
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbNuevo)
+                            .addComponent(jbLimpiar)
                             .addComponent(jbEliminar)
                             .addComponent(jbGuardar)
                             .addComponent(jbSalir)))
@@ -239,34 +239,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
  int dni = Integer.parseInt(jtDni.getText());
         try {
             alumPrincipa =alumd.buscarAlumnoPorDni(dni);
-//            if (alumPrincipa.getDni()== alum.getDni()) {
-//                
-////                String apellido = jtApellido.getText();
-////                String nombre = jtNombre.getText();
-////
-////                LocalDate fechadeNac = jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-////                
-////                boolean estado = false;
-////                        
-////                if (jrbEstado.isSelected()) {
-////                    estado=true;
-////                }
-////                Alumno alumno1 = new Alumno(dni, apellido, nombre, fechadeNac, estado);
-////
-////                alumd.guardarAlumno(alumno1);
-//            } else {
-                if (jrbEstado.isSelected()==false) {
-                    alumPrincipa.setActivo(false);
-                }else{
-                    alumPrincipa.setActivo(true);
-                }
-                alumd.modificarAlumno(alumPrincipa);
-                limpiarjT();
-                jbEliminar.setEnabled(false);
-//            }
-        } catch (Exception e) {
-            
-              alumPrincipa.setDni(Integer.parseInt(jtDni.getText());
+                alumPrincipa.setDni(Integer.parseInt(jtDni.getText());
                 alumPrincipa.setApellido( jtApellido.getText());
                 alumPrincipa.setNombre(jtNombre.getText());
 
@@ -279,14 +252,30 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 alumPrincipa.setActivo(estado);
                 
                 alumd.modificarAlumno(alumPrincipa);
-               
+               alumPrincipa=null
+//    
+        } catch (NullPointerException e) {
+                String apellido = jtApellido.getText();
+                String nombre = jtNombre.getText();
+
+                LocalDate fechadeNac = jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                
+                boolean estado = false;
+                        
+                if (jrbEstado.isSelected()) {
+                    estado=true;
+                }
+                Alumno alumno1 = new Alumno(dni, apellido, nombre, fechadeNac, estado);
+
+                alumd.guardarAlumno(alumno1);
+//      
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
-    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         // TODO add your handling code here:
         limpiarjT();
-    }//GEN-LAST:event_jbNuevoActionPerformed
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         AlumnoData alumd = new AlumnoData();
@@ -311,16 +300,18 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         AlumnoData alumd = new AlumnoData();
-        alumd.eliminarAlumno(alumPrincipa.getIdAlumno());
-        limpiarjT();// TODO add your handling code here:
+        try {
+             alumd.eliminarAlumno(alumPrincipa.getIdAlumno());
+        limpiarjT();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Faltan llenar Campos");
+            
+        }
+
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jrbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEstadoActionPerformed
-boolean estado = false;
-        if (jrbEstado.isSelected()) {
-            estado = true;
-        }
-        alumPrincipa.setActivo(estado);        // TODO add your handling code here:
+     
     }//GEN-LAST:event_jrbEstadoActionPerformed
 
     private void jtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDniActionPerformed
@@ -343,7 +334,7 @@ boolean estado = false;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
-    private javax.swing.JButton jbNuevo;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbSalir;
     private com.toedter.calendar.JDateChooser jdateFechadeNac;
     private javax.swing.JRadioButton jrbEstado;
@@ -361,7 +352,7 @@ private void limpiarjT() {
     }
 
     private void activar() {
-        jbNuevo.setEnabled(true);
+        jbLimpiar.setEnabled(true);
         jbGuardar.setEnabled(true);
         jtApellido.setEnabled(true);
         jdateFechadeNac.setEnabled(true);
