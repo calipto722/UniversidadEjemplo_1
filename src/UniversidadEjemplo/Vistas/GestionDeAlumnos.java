@@ -239,7 +239,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
  int dni = Integer.parseInt(jtDni.getText());
         try {
             alumPrincipa =alumd.buscarAlumnoPorDni(dni);
-                alumPrincipa.setDni(Integer.parseInt(jtDni.getText());
+                alumPrincipa.setDni(Integer.parseInt(jtDni.getText()));
                 alumPrincipa.setApellido( jtApellido.getText());
                 alumPrincipa.setNombre(jtNombre.getText());
 
@@ -252,7 +252,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 alumPrincipa.setActivo(estado);
                 
                 alumd.modificarAlumno(alumPrincipa);
-               alumPrincipa=null
+               alumPrincipa=null;
 //    
         } catch (NullPointerException e) {
                 String apellido = jtApellido.getText();
@@ -270,6 +270,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 alumd.guardarAlumno(alumno1);
 //      
         }
+        limpiarjT();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
