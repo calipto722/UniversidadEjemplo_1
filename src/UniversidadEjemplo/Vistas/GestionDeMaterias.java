@@ -7,6 +7,7 @@ package UniversidadEjemplo.Vistas;
 
 import UniversidadEjemplo.AccesoADatos.MateriaData;
 import UniversidadEjemplo.Entidades.Materia;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,7 +22,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         initComponents();
         this.setTitle("Materia");
     }
-    Materia matPrincipal=null;
+    Materia matPrincipal = null;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,10 +72,25 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         });
 
         jLimpiar.setText("Nuevo");
+        jLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLimpiarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -191,17 +207,63 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-MateriaData matd =new MateriaData();
-int codigo= Integer.parseInt(jtCodigo.getText());
- matPrincipal=matd.buscarMateria(codigo);
+        MateriaData matd = new MateriaData();
+        int codigo = Integer.parseInt(jtCodigo.getText());
+        matPrincipal = matd.buscarMateria(codigo);
         try {
-          jtNombre.setText(matPrincipal.getNombre());
-jtaño.setText(matPrincipal.getAnioMateria()+"");
-jrEstado.setSelected(matPrincipal.isActivo());//   
+            jtNombre.setText(matPrincipal.getNombre());
+            jtaño.setText(matPrincipal.getAnioMateria() + "");
+            jrEstado.setSelected(matPrincipal.isActivo());//   
         } catch (NullPointerException e) {
         }
 
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLimpiarActionPerformed
+        limpiarjT();  // TODO add your handling code here:
+    }//GEN-LAST:event_jLimpiarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        MateriaData matdat = new MateriaData();
+        try {
+            matdat.eliminarMateria(matPrincipal.getIdMateria());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Faltan llenar Campos");
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        MateriaData matd = new MateriaData();
+        int codigo = Integer.parseInt(jtCodigo.getText());
+
+        try {
+            matPrincipal = matd.buscarMateria(codigo);
+            matPrincipal.setNombre(jtNombre.getText());
+            boolean estado = false;
+                if (jrEstado.isSelected()) {
+                    estado = true;
+                }
+                matPrincipal.setActivo(estado);
+            
+                matPrincipal.setAnioMateria(Integer.parseInt(jtaño.getText()));
+        matd.modificarMateria(matPrincipal);
+        matPrincipal=null;
+        
+        } catch (NullPointerException e) {
+            
+            String nombre = jtNombre.getText();
+                int año = Integer.parseInt(jtaño.getText());
+                boolean estado = false;
+                        
+                if (jrEstado.isSelected()) {
+                    estado=true;
+                }
+                Materia materia=new Materia(nombre,año, estado);
+                matd.guargarMateria(materia);
+        }
+     limpiarjT();   // TODO add your handling code here:
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -222,4 +284,10 @@ jrEstado.setSelected(matPrincipal.isActivo());//
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtaño;
     // End of variables declaration//GEN-END:variables
+private void limpiarjT() {
+        jtCodigo.setText("");
+        jtNombre.setText("");
+        jtaño.setText("");
+        jrEstado.setSelected(false);
+    }
 }

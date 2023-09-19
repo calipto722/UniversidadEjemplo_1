@@ -22,10 +22,10 @@ public class MateriaData {
 
     public void guargarMateria(Materia materia) {
 
-        String sql = "INSERT INTO `materia`( `nombre`, `año`, `estado`) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO `materia`( `nombre`, `año`, `estado`) VALUES (?,?,?)";
 
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnioMateria());
             ps.setBoolean(3, materia.isActivo());
@@ -35,6 +35,7 @@ public class MateriaData {
                 materia.setIdMateria(rs.getInt("idMateria"));
                 JOptionPane.showMessageDialog(null, "Materia añadida con exito ");
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia " + ex.getMessage());
         }
@@ -42,6 +43,7 @@ public class MateriaData {
     }
 
     public Materia buscarMateria(int id) {
+        // problema al ingresar materia a la base de datos!
         Materia materia = null;
         String sql = "SELECT `nombre`, `año`, `estado` FROM `materia` WHERE idMateria=? and `estado` =1";
         PreparedStatement ps = null;
