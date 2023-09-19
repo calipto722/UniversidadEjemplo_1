@@ -260,7 +260,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
                     estado=true;
                 }
                 Materia materia=new Materia(nombre,año, estado);
-                matd.guargarMateria(materia);
+                matd.guardarMateria(materia);
         }
      limpiarjT();   // TODO add your handling code here:
     }//GEN-LAST:event_jbGuardarActionPerformed

@@ -11,7 +11,7 @@ import UniversidadEjemplo.AccesoADatos.MateriaData;
 import UniversidadEjemplo.AccesoADatos.UsuarioData;
 import UniversidadEjemplo.Vistas.MenuPrincipal;
 import java.time.LocalDate;
-import java.time.Month;
+import java.time.Month;;
 
 /**
  *
@@ -36,8 +36,8 @@ public class UniversidadEjemplo {
 //        usuariodata.verificarPasswor(usuario, pas);
     Materia materia= new Materia("Matematica", 1, true);
         MateriaData matd= new MateriaData();
-  //      matd.guargarMateria(materia);
-        matd.buscarMateria(0);
+        matd.guardarMateria(materia);
+    //
     }
     
 }
