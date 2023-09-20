@@ -5,6 +5,15 @@
  */
 package UniversidadEjemplo.Vistas;
 
+import UniversidadEjemplo.AccesoADatos.AlumnoData;
+import UniversidadEjemplo.AccesoADatos.InscripcionData;
+import UniversidadEjemplo.AccesoADatos.MateriaData;
+import UniversidadEjemplo.Entidades.Alumno;
+import UniversidadEjemplo.Entidades.Inscripcion;
+import UniversidadEjemplo.Entidades.Materia;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,15 +21,20 @@ import javax.swing.table.DefaultTableModel;
  * @author elmsn
  */
 public class GestionInscripciones extends javax.swing.JInternalFrame {
-private DefaultTableModel modelo= new DefaultTableModel();
+
+    private DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form GestionInscripciones
      */
     public GestionInscripciones() {
         initComponents();
+        cargarbox();
         armarCabecera();
         this.setTitle("Formulario de Inscripcion");
+
     }
+    boolean materiasSIoNO;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,11 +63,25 @@ private DefaultTableModel modelo= new DefaultTableModel();
 
         jLabel2.setText("Seleccion un alumno:");
 
-        jcbAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAlumnoActionPerformed(evt);
+            }
+        });
 
         jrbMateriasInscriptas.setText(" Materias Inscriptas");
+        jrbMateriasInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbMateriasInscriptasActionPerformed(evt);
+            }
+        });
 
         jrbMateriasNoInscriptas.setText("Materias no inscriptas");
+        jrbMateriasNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbMateriasNoInscriptasActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Listado de Materias");
 
@@ -170,10 +198,47 @@ private DefaultTableModel modelo= new DefaultTableModel();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-     // TODO add your handling code here:
-     dispose();
+        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jcbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoActionPerformed
+        
+//        InscripcionData inscripcionD = new InscripcionData();
+//        Alumno alum = (Alumno) jcbAlumno.getSelectedItem();
+//        List<Materia> Materias;
+//        try {
+//            if (materiasSIoNO) {
+//                Materias = inscripcionD.obtenerMateriasCursadas(alum.getIdAlumno());
+//            }
+//             Materias=inscripcionD.obtenerMatriasNOCursadas(alum.getIdAlumno());
+//        modelo.setRowCount(0);
+//        for (Materia Materia1 : Materias) {
+//            
+//                modelo.addRow(new Object[]{
+//                    Materia1.getIdMateria(),
+//                    Materia1.getNombre(),
+//                    Materia1.getAnioMateria(),}
+//                );
+//        }} catch (NullPointerException e) {
+//                
+//        }
+//        
+//        
+            
+
+        
+    }//GEN-LAST:event_jcbAlumnoActionPerformed
+
+    private void jrbMateriasInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasInscriptasActionPerformed
+        jrbMateriasNoInscriptas.setEnabled(false);
+        materiasSIoNO = true;// TODO add your handling code here:
+    }//GEN-LAST:event_jrbMateriasInscriptasActionPerformed
+
+    private void jrbMateriasNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasNoInscriptasActionPerformed
+        jrbMateriasInscriptas.setEnabled(false);
+        materiasSIoNO = false;// TODO add your handling code here:
+    }//GEN-LAST:event_jrbMateriasNoInscriptasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -186,16 +251,26 @@ private DefaultTableModel modelo= new DefaultTableModel();
     private javax.swing.JButton jbAnularInscripcion;
     private javax.swing.JButton jbInscribir;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcbAlumno;
+    private javax.swing.JComboBox<Alumno> jcbAlumno;
     private javax.swing.JRadioButton jrbMateriasInscriptas;
     private javax.swing.JRadioButton jrbMateriasNoInscriptas;
     // End of variables declaration//GEN-END:variables
-private void armarCabecera(){
-    modelo.addColumn("ID");
-    modelo.addColumn("Nombre");
-    modelo.addColumn("Año");
-    
-    jTable1.setModel(modelo);
+private void armarCabecera() {
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Año");
 
-}
+        jTable1.setModel(modelo);
+
+    }
+
+    private void cargarbox() {
+
+        AlumnoData alumd = new AlumnoData();
+        List<Alumno> Alumnos = alumd.listarAlumnos();
+        jcbAlumno.removeAllItems();
+        for (int i = 0; i < Alumnos.size(); i++) {
+            jcbAlumno.addItem(Alumnos.get(i));
+        }
+    }
 }

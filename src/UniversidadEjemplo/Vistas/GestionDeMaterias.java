@@ -247,6 +247,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
                 matPrincipal.setActivo(estado);
             
                 matPrincipal.setAnioMateria(Integer.parseInt(jtaño.getText()));
+               
         matd.modificarMateria(matPrincipal);
         matPrincipal=null;
         

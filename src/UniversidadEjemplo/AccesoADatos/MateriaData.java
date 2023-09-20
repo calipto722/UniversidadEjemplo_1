@@ -45,7 +45,7 @@ public class MateriaData {
     public Materia buscarMateria(int id) {
         // problema al ingresar materia a la base de datos!
         Materia materia = null;
-        String sql = "SELECT `nombre`, `año`, `estado` FROM `materia` WHERE idMateria=? and `estado` =1";
+        String sql = "SELECT `nombre`, `año`, `estado` FROM `materia` WHERE idMateria=?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -58,7 +58,7 @@ public class MateriaData {
                 materia.setIdMateria(id);
                 materia.setAnioMateria(rs.getInt("año"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setActivo(true);
+                materia.setActivo(rs.getBoolean("estado"));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la Materia");
                 ps.close();
@@ -122,7 +122,7 @@ public class MateriaData {
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setAnioMateria(rs.getInt("año"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setActivo(true);
+                materia.setActivo(rs.getBoolean("estado"));
                 materias.add(materia);
             }
             ps.close();
