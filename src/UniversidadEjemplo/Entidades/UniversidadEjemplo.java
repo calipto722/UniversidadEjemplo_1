@@ -7,11 +7,14 @@ package UniversidadEjemplo.Entidades;
 
 import UniversidadEjemplo.AccesoADatos.AlumnoData;
 import UniversidadEjemplo.AccesoADatos.Conexion;
+import UniversidadEjemplo.AccesoADatos.InscripcionData;
 import UniversidadEjemplo.AccesoADatos.MateriaData;
 import UniversidadEjemplo.AccesoADatos.UsuarioData;
 import UniversidadEjemplo.Vistas.MenuPrincipal;
 import java.time.LocalDate;
-import java.time.Month;;
+import java.time.Month
+        ;import java.util.List;
+;
 
 /**
  *
@@ -34,10 +37,19 @@ public class UniversidadEjemplo {
 //        usuariodata.verificarUsuario(usuario.getNombre());
 //        String pas = "calipto722@gmail.com";
 //        usuariodata.verificarPasswor(usuario, pas);
-    Materia materia= new Materia("Matematica", 1, true);
-        MateriaData matd= new MateriaData();
-        matd.guardarMateria(materia);
+//    Materia materia= new Materia("Matematica", 1, true);
+//        MateriaData matd= new MateriaData();
+//        matd.guardarMateria(materia);
     //
+    InscripcionData insd= new InscripcionData();
+    List<Materia> materias=insd.obtenerMateriasNoCursadas(7);
+    
+    for (Materia Materia1 : materias){
+        System.out.println(""+Materia1.getAnioMateria() +","+
+     + Materia1.getIdMateria()
+      +Materia1.getNombre());
+    }
+    
     }
     
 }

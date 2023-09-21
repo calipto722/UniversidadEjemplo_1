@@ -40,7 +40,7 @@ public class InscripcionData {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                insc.setIdInscripcion(rs.getInt("idInscripto"));
+                insc.setIdInscripcion(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Inscripcion añadida con exito ");
             }
         } catch (SQLException ex) {
@@ -104,7 +104,7 @@ public class InscripcionData {
     public List<Materia> obtenerMateriasCursadas(int id) {
         List<Materia> materias = new ArrayList<Materia>();
         try {
-            String sql = "SELECT `Inscripcion.idMateria`, `nombre`, `año` FROM `inscripcion`, materia "
+            String sql = "SELECT inscripcion.idMateria, `nombre`, `año` FROM `inscripcion`, materia "
                     + "WHERE inscripcion.idMateria =materia.idMateria and inscripcion.idAlumno = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -125,11 +125,11 @@ public class InscripcionData {
     }
 
     // Revisar
-    public List<Materia> obtenerMatriasNOCursadas(int id) {
+    public List<Materia> obtenerMateriasNoCursadas(int id) {
         List<Materia> materiasNO = new ArrayList<Materia>();
         try {
-            String sql = "SELECT `Inscripcion, `nombre`, `año` FROM `inscripcion`, materia "
-                    + "WHERE  NOT inscripcion.idMateria =materia.idMateria and inscripcion.idAlumno = ?";
+            String sql = "SELECT inscripcion.idMateria, `nombre`, `año` FROM `inscripcion`, materia "
+                    + "WHERE  NOT IN  inscripcion.idMateria =materia.idMateria and inscripcion.idAlumno = ?";
 
             // Where not in 
             PreparedStatement ps = con.prepareStatement(sql);

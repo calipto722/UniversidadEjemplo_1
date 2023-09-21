@@ -34,7 +34,7 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
         this.setTitle("Formulario de Inscripcion");
 
     }
-    boolean materiasSIoNO;
+//    boolean materiasSIoNO;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,6 +45,7 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Materias = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -69,6 +70,7 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
             }
         });
 
+        Materias.add(jrbMateriasInscriptas);
         jrbMateriasInscriptas.setText(" Materias Inscriptas");
         jrbMateriasInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +78,7 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
             }
         });
 
+        Materias.add(jrbMateriasNoInscriptas);
         jrbMateriasNoInscriptas.setText("Materias no inscriptas");
         jrbMateriasNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +102,11 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jbInscribir.setText("Inscribir");
+        jbInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInscribirActionPerformed(evt);
+            }
+        });
 
         jbAnularInscripcion.setText("Anular Inscripcion");
 
@@ -222,24 +230,61 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
 //        }} catch (NullPointerException e) {
 //                
 //        }
-//        
-//        
+        
+        
             
 
         
     }//GEN-LAST:event_jcbAlumnoActionPerformed
 
     private void jrbMateriasInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasInscriptasActionPerformed
-        jrbMateriasNoInscriptas.setEnabled(false);
-        materiasSIoNO = true;// TODO add your handling code here:
+        InscripcionData inscripcionD = new InscripcionData();
+        MateriaData matd= new MateriaData();
+        Alumno alum = (Alumno) jcbAlumno.getSelectedItem();
+        List<Materia> Materias;
+        List<Materia> Materias1= matd.listarMaterias();
+        try{
+            Materias= inscripcionD.obtenerMateriasCursadas(alum.getIdAlumno());
+             modelo.setRowCount(0);
+        for (Materia Materia1 : Materias) {
+//         if(Materia1.equals(alum.getIdAlumno()) )   
+                modelo.addRow(new Object[]{
+                    Materia1.getIdMateria(),
+                    Materia1.getNombre(),
+                    Materia1.getAnioMateria(),}
+                );
+        } }catch (NullPointerException e){
+            
+        }
+//        materiasSIoNO = true;// TODO add your handling code here:
     }//GEN-LAST:event_jrbMateriasInscriptasActionPerformed
 
     private void jrbMateriasNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasNoInscriptasActionPerformed
-        jrbMateriasInscriptas.setEnabled(false);
-        materiasSIoNO = false;// TODO add your handling code here:
+//       InscripcionData inscripcionD = new InscripcionData();
+//        Alumno alum = (Alumno) jcbAlumno.getSelectedItem();
+//        List<Materia> Materias;
+//        try{
+//            Materias= inscripcionD.obtenerMatriasNOCursadas(alum.getIdAlumno());
+//             modelo.setRowCount(0);
+//        for (Materia Materia1 : Materias) {
+//            
+//                modelo.addRow(new Object[]{
+//                    Materia1.getIdMateria(),
+//                    Materia1.getNombre(),
+//                    Materia1.getAnioMateria(),}
+//                );
+//        } }catch (NullPointerException e){
+//            
+//        }
+//        materiasSIoNO = false;// TODO add your handling code here:
     }//GEN-LAST:event_jrbMateriasNoInscriptasActionPerformed
 
+    private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbInscribirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.ButtonGroup Materias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
