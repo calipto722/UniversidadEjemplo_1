@@ -24,7 +24,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     public GestionDeAlumnos() {
         initComponents();
         this.setTitle("Alumnos");
-        jbEliminar.setEnabled(false);
+        
     }
     Alumno alumPrincipa=null;
 
@@ -290,11 +290,14 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             jdateFechadeNac.setDate(java.sql.Date.valueOf(alumPrincipa.getFechaNac()));
             jrbEstado.setSelected(alumPrincipa.isActivo());
 
-            jbEliminar.setEnabled(true);
+            
             
         } catch (NullPointerException e) {
             
 
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error al llenar Campos");
+            
         }
 
     }//GEN-LAST:event_jbBuscarActionPerformed
