@@ -211,29 +211,7 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
 
     private void jcbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoActionPerformed
         
-//        InscripcionData inscripcionD = new InscripcionData();
-//        Alumno alum = (Alumno) jcbAlumno.getSelectedItem();
-//        List<Materia> Materias;
-//        try {
-//            if (materiasSIoNO) {
-//                Materias = inscripcionD.obtenerMateriasCursadas(alum.getIdAlumno());
-//            }
-//             Materias=inscripcionD.obtenerMatriasNOCursadas(alum.getIdAlumno());
-//        modelo.setRowCount(0);
-//        for (Materia Materia1 : Materias) {
-//            
-//                modelo.addRow(new Object[]{
-//                    Materia1.getIdMateria(),
-//                    Materia1.getNombre(),
-//                    Materia1.getAnioMateria(),}
-//                );
-//        }} catch (NullPointerException e) {
-//                
-//        }
-        
-        
-            
-
+//  
         
     }//GEN-LAST:event_jcbAlumnoActionPerformed
 
@@ -247,7 +225,7 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
             Materias= inscripcionD.obtenerMateriasCursadas(alum.getIdAlumno());
              modelo.setRowCount(0);
         for (Materia Materia1 : Materias) {
-//         if(Materia1.equals(alum.getIdAlumno()) )   
+//         
                 modelo.addRow(new Object[]{
                     Materia1.getIdMateria(),
                     Materia1.getNombre(),
@@ -260,27 +238,33 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbMateriasInscriptasActionPerformed
 
     private void jrbMateriasNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMateriasNoInscriptasActionPerformed
-//       InscripcionData inscripcionD = new InscripcionData();
-//        Alumno alum = (Alumno) jcbAlumno.getSelectedItem();
-//        List<Materia> Materias;
-//        try{
-//            Materias= inscripcionD.obtenerMatriasNOCursadas(alum.getIdAlumno());
-//             modelo.setRowCount(0);
-//        for (Materia Materia1 : Materias) {
-//            
-//                modelo.addRow(new Object[]{
-//                    Materia1.getIdMateria(),
-//                    Materia1.getNombre(),
-//                    Materia1.getAnioMateria(),}
-//                );
-//        } }catch (NullPointerException e){
-//            
-//        }
-//        materiasSIoNO = false;// TODO add your handling code here:
+       InscripcionData inscripcionD = new InscripcionData();
+        Alumno alum = (Alumno) jcbAlumno.getSelectedItem();
+        List<Materia> Materias;
+        try{
+            Materias= inscripcionD.obtenerMateriasNoCursadas(alum.getIdAlumno());
+             modelo.setRowCount(0);
+        for (Materia Materia1 : Materias) {
+            
+                modelo.addRow(new Object[]{
+                    Materia1.getIdMateria(),
+                    Materia1.getNombre(),
+                    Materia1.getAnioMateria(),}
+                );
+        } }catch (NullPointerException e){
+            
+        }
+     
     }//GEN-LAST:event_jrbMateriasNoInscriptasActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
-        // TODO add your handling code here:
+//      Alumno alum =(Alumno) jcbAlumno.getSelectedItem();
+//    //  int idMateria= jTable1.getSelectionModel();
+//      Materia materiaSelec =jTable1.getSelectionModel();// TODO add your handling code here:
+//      Inscripcion inscripcion = new Inscripcion(materiaSelec, alum, 0);
+//     InscripcionData inscripcionData =new InscripcionData();
+//     inscripcionData.guardarInscripcion(inscripcion);
+//      
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

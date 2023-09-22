@@ -5,6 +5,9 @@
  */
 package UniversidadEjemplo.Vistas;
 
+import UniversidadEjemplo.AccesoADatos.AlumnoData;
+import UniversidadEjemplo.Entidades.Alumno;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +24,7 @@ private DefaultTableModel modelo= new DefaultTableModel();
     public GestionDeNotas() {
         initComponents();
         armarCabecera();
+        cargarbox();
         this.setTitle("Carga de notas");
     }
 
@@ -46,7 +50,11 @@ private DefaultTableModel modelo= new DefaultTableModel();
 
         jLabel2.setText("Seleccione un Alumno:");
 
-        jcbAlumno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAlumnoActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,6 +134,10 @@ private DefaultTableModel modelo= new DefaultTableModel();
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jcbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbAlumnoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -135,7 +147,7 @@ private DefaultTableModel modelo= new DefaultTableModel();
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcbAlumno;
+    private javax.swing.JComboBox<Alumno> jcbAlumno;
     // End of variables declaration//GEN-END:variables
 private void armarCabecera(){
     modelo.addColumn("Codigo");
@@ -144,5 +156,13 @@ private void armarCabecera(){
     
     jTable1.setModel(modelo);
 }
+private void cargarbox() {
 
+        AlumnoData alumd = new AlumnoData();
+        List<Alumno> Alumnos = alumd.listarAlumnos();
+        jcbAlumno.removeAllItems();
+        for (int i = 0; i < Alumnos.size(); i++) {
+            jcbAlumno.addItem(Alumnos.get(i));
+        }
+    }
 }
