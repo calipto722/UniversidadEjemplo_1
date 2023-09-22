@@ -258,13 +258,15 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbMateriasNoInscriptasActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
-//      Alumno alum =(Alumno) jcbAlumno.getSelectedItem();
-//    //  int idMateria= jTable1.getSelectionModel();
-//      Materia materiaSelec =jTable1.getSelectionModel();// TODO add your handling code here:
-//      Inscripcion inscripcion = new Inscripcion(materiaSelec, alum, 0);
-//     InscripcionData inscripcionData =new InscripcionData();
-//     inscripcionData.guardarInscripcion(inscripcion);
-//      
+      Alumno alum =(Alumno) jcbAlumno.getSelectedItem();
+      MateriaData matd= new MateriaData();
+      int filaSeleccionada= jTable1.getSelectedRow();
+      int materiaSelec = (Integer)modelo.getValueAt(filaSeleccionada,0 );
+        Materia materiaSelec2 = matd.buscarMateria(materiaSelec);// TODO add your handling code here:
+      Inscripcion inscripcion = new Inscripcion(materiaSelec2, alum, 0);
+     InscripcionData inscripcionData =new InscripcionData();
+     inscripcionData.guardarInscripcion(inscripcion);
+      
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

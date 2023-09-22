@@ -32,8 +32,6 @@ public class InscripcionData {
         try {
 
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            // Alumno alumno = alumnoData.buscarAlumno(Statement.RETURN_GENERATED_KEYS);
-            //  Materia materia = materiaData.buscarMateria(Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, (int) insc.getNota());
             ps.setInt(2, insc.getAlumno().getIdAlumno());
             ps.setInt(3, insc.getMateria().getIdMateria());
@@ -155,4 +153,22 @@ public class InscripcionData {
         return materiasNO;
     }
 
+    public void eliminarInscripcion(Inscripcion insc){
+       String sql=" DELETE FROM `inscripcion` WHERE idAlumno=? AND IdMateria= ?";
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, (int) insc.getAlumno().getIdAlumno());
+            ps.setInt(2, insc.getMateria().getIdMateria());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                insc.setIdInscripcion(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Inscripcion Eliminada con exito ");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }
