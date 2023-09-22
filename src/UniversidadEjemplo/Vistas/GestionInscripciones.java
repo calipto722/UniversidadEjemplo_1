@@ -275,14 +275,14 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscripcionActionPerformed
-        Alumno alum =(Alumno) jcbAlumno.getSelectedItem();
-      MateriaData matd= new MateriaData();
-      int filaSeleccionada= jTable1.getSelectedRow();
-      int materiaSelec = (Integer)modelo.getValueAt(filaSeleccionada,0 );
+        Alumno alum = (Alumno) jcbAlumno.getSelectedItem();
+        MateriaData matd = new MateriaData();
+        int filaSeleccionada = jTable1.getSelectedRow();
+        int materiaSelec = (Integer) modelo.getValueAt(filaSeleccionada, 0);
         Materia materiaSelec2 = matd.buscarMateria(materiaSelec);// TODO add your handling code here:
-      Inscripcion inscripcion = new Inscripcion(materiaSelec2, alum, 0);
-     InscripcionData inscripcionData =new InscripcionData();
-     inscripcionData.eliminarInscripcion(inscripcion);// TODO add your handling code here:
+        Inscripcion inscripcion = new Inscripcion(materiaSelec2, alum, 0);
+        InscripcionData inscripcionData = new InscripcionData();
+        inscripcionData.eliminarInscripcion(inscripcion);// TODO add your handling code here:
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

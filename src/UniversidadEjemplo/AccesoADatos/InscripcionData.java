@@ -162,8 +162,8 @@ public class InscripcionData {
             ps.setInt(2, insc.getMateria().getIdMateria());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                insc.setIdInscripcion(rs.getInt(1));
+           if (rs.next()) {
+              //  insc.setIdInscripcion(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Inscripcion Eliminada con exito ");
             }
         } catch (SQLException ex) {
