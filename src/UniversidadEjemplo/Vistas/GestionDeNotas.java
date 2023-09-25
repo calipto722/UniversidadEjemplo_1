@@ -6,7 +6,11 @@
 package UniversidadEjemplo.Vistas;
 
 import UniversidadEjemplo.AccesoADatos.AlumnoData;
+import UniversidadEjemplo.AccesoADatos.InscripcionData;
+import UniversidadEjemplo.AccesoADatos.MateriaData;
 import UniversidadEjemplo.Entidades.Alumno;
+import UniversidadEjemplo.Entidades.Inscripcion;
+import UniversidadEjemplo.Entidades.Materia;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,8 +19,8 @@ import javax.swing.table.DefaultTableModel;
  * @author elmsn
  */
 public class GestionDeNotas extends javax.swing.JInternalFrame {
-private DefaultTableModel modelo= new DefaultTableModel();
 
+    private DefaultTableModel modelo = new DefaultTableModel();
 
     /**
      * Creates new form GestionDeNotas
@@ -70,6 +74,11 @@ private DefaultTableModel modelo= new DefaultTableModel();
         jScrollPane1.setViewportView(jTable1);
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -135,8 +144,41 @@ private DefaultTableModel modelo= new DefaultTableModel();
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jcbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoActionPerformed
-        // TODO add your handling code here:
+        AlumnoData alumd = new AlumnoData();
+        MateriaData materiaData = new MateriaData();
+        InscripcionData inscripcionD = new InscripcionData();
+        Alumno alumno = (Alumno) jcbAlumno.getSelectedItem();
+
+        List<Inscripcion> insc;
+        modelo.setRowCount(0);
+        try {
+            List<Materia> materiasCursadas = inscripcionD.obtenerMateriasCursadas(alumno.getIdAlumno());
+            for (Materia materiasCursada : materiasCursadas) {
+                insc = inscripcionD.obtenerInscripcionesPorMateria(materiasCursada.getIdMateria());
+                for (Inscripcion inscripcion : insc) {
+
+                    modelo.addRow(new Object[]{
+                        inscripcion.getMateria().getIdMateria(),
+                        inscripcion.getMateria().getNombre(),
+                        inscripcion.getNota()}
+                    );
+
+                }
+            }
+
+        } catch (NullPointerException e) {
+
+        } // TODO add your handling code here:
     }//GEN-LAST:event_jcbAlumnoActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+//   no se como guardar la id de inscripcion para actualizar la base de dato
+//InscripcionData inscripcionData= new InscripcionData();
+//    Alumno alum =(Alumno) jcbAlumno.getSelectedItem();
+//    int filaSeleccionada= jTable1.getSelectedRow();
+//    
+//inscripcionData.actualizarInscripcion(inscripcion);// TODO add your handling code here:
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -149,14 +191,15 @@ private DefaultTableModel modelo= new DefaultTableModel();
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Alumno> jcbAlumno;
     // End of variables declaration//GEN-END:variables
-private void armarCabecera(){
-    modelo.addColumn("Codigo");
-    modelo.addColumn("Nombre");
-    modelo.addColumn("Nota");
-    
-    jTable1.setModel(modelo);
-}
-private void cargarbox() {
+private void armarCabecera() {
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Nota");
+
+        jTable1.setModel(modelo);
+    }
+
+    private void cargarbox() {
 
         AlumnoData alumd = new AlumnoData();
         List<Alumno> Alumnos = alumd.listarAlumnos();

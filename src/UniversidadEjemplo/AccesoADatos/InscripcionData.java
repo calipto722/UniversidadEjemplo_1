@@ -200,4 +200,30 @@ public class InscripcionData {
         }
         return inscripciones;
     }
+
+    public void actualizarInscripcion(Inscripcion inscripcion) {
+        String sql = "UPDATE `inscripcion` SET `nota`=?,`idAlumno`=?,`IdMateria`=? WHERE `idInscripcion`=?";
+
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, inscripcion.getNota());
+            ps.setInt(2, inscripcion.getAlumno().getIdAlumno());
+            ps.setInt(3, inscripcion.getMateria().getIdMateria());
+            ps.setInt(4, inscripcion.getIdInscripcion());
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Modificado Exitosamente. ");
+            } else {
+                JOptionPane.showMessageDialog(null, "La Inscripcion no existe");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage());
+
+        }
+
+    }
 }
