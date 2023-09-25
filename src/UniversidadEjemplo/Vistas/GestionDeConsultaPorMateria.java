@@ -133,8 +133,9 @@ public class GestionDeConsultaPorMateria extends javax.swing.JInternalFrame {
         List<Inscripcion> insc;
         try {
             insc = inscripcionD.obtenerInscripcionesPorMateria(materia.getIdMateria());
+           modelo.setRowCount(0);
             for (Inscripcion inscripcion : insc) {
-                if (inscripcion.getMateria().equals(materia)) {
+                
                     modelo.addRow(new Object[]{
                         inscripcion.getAlumno().getIdAlumno(),
                         inscripcion.getAlumno().getDni(),
@@ -142,7 +143,7 @@ public class GestionDeConsultaPorMateria extends javax.swing.JInternalFrame {
                         inscripcion.getAlumno().getNombre()}
                     );
 
-                }
+                
             }
         } catch (NullPointerException e) {
 

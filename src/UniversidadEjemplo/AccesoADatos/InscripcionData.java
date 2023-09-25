@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class InscripcionData {
 
     private Connection con = null;
-    private MateriaData materiaData= new MateriaData();
+    private MateriaData materiaData = new MateriaData();
     private AlumnoData alumnoData = new AlumnoData();
 
     public InscripcionData() {
@@ -54,14 +54,12 @@ public class InscripcionData {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-              
+
                 Inscripcion inscripcion = new Inscripcion();
-                System.out.println("aaaaaa");
+
                 Alumno alumno = alumnoData.buscarAlumno(rs.getInt("idAlumno"));
 
-                System.out.println(alumno);
                 Materia materia = materiaData.buscarMateria(rs.getInt("IdMateria"));
-                System.out.println(materia);
 
                 inscripcion.setIdInscripcion(rs.getInt("idInscripcion"));
                 inscripcion.setAlumno(alumno);
@@ -176,7 +174,7 @@ public class InscripcionData {
         }
 
     }
-    
+
     public List<Inscripcion> obtenerInscripcionesPorMateria(int id) {
         List<Inscripcion> inscripciones = new ArrayList<>();
         String sql = "SELECT * FROM inscripcion WHERE inscripcion.IdMateria = ?";
@@ -189,7 +187,7 @@ public class InscripcionData {
                 Alumno alumno = new Alumno();
                 Materia materia = new Materia();
                 alumno = alumnoData.buscarAlumno(rs.getInt("idAlumno"));
-                materia = materiaData.buscarMateria(rs.getInt(id));
+                materia = materiaData.buscarMateria(id);
                 inscripcion.setIdInscripcion(rs.getInt("idInscripcion"));
                 inscripcion.setAlumno(alumno);
                 inscripcion.setNota(rs.getInt("nota"));
