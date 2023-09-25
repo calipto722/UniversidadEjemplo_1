@@ -5,6 +5,13 @@
  */
 package UniversidadEjemplo.Vistas;
 
+import UniversidadEjemplo.AccesoADatos.AlumnoData;
+import UniversidadEjemplo.AccesoADatos.InscripcionData;
+import UniversidadEjemplo.AccesoADatos.MateriaData;
+import UniversidadEjemplo.Entidades.Alumno;
+import UniversidadEjemplo.Entidades.Inscripcion;
+import UniversidadEjemplo.Entidades.Materia;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,14 +19,18 @@ import javax.swing.table.DefaultTableModel;
  * @author elmsn
  */
 public class GestionDeConsultaPorMateria extends javax.swing.JInternalFrame {
-private DefaultTableModel modelo= new DefaultTableModel();
+
+    private DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form GestionDeConsultaPorMateria
      */
     public GestionDeConsultaPorMateria() {
         initComponents();
         armarCabecera();
-        
+        cargarbox();
+        this.setTitle("Consulta Por Materia");
+
     }
 
     /**
@@ -33,7 +44,7 @@ private DefaultTableModel modelo= new DefaultTableModel();
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jcbAlumnos = new javax.swing.JComboBox<>();
+        jcbMaterias = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jbSalir = new javax.swing.JButton();
@@ -42,7 +53,11 @@ private DefaultTableModel modelo= new DefaultTableModel();
 
         jLabel2.setText("Seleccione una materia:");
 
-        jcbAlumnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbMateriasActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,7 +92,7 @@ private DefaultTableModel modelo= new DefaultTableModel();
                         .addGap(48, 48, 48)
                         .addComponent(jLabel2)
                         .addGap(42, 42, 42)
-                        .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcbMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -94,7 +109,7 @@ private DefaultTableModel modelo= new DefaultTableModel();
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
@@ -110,6 +125,32 @@ private DefaultTableModel modelo= new DefaultTableModel();
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jcbMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMateriasActionPerformed
+        AlumnoData alumd = new AlumnoData();
+        InscripcionData inscripcionD = new InscripcionData();
+        Materia materia = (Materia) jcbMaterias.getSelectedItem();
+//      List<Alumno> Alumnos = alumd.listarAlumnos();
+        List<Inscripcion> insc;
+        try {
+            insc = inscripcionD.obtenerInscripcionesPorMateria(materia.getIdMateria());
+            for (Inscripcion inscripcion : insc) {
+                if (inscripcion.getMateria().equals(materia)) {
+                    modelo.addRow(new Object[]{
+                        inscripcion.getAlumno().getIdAlumno(),
+                        inscripcion.getAlumno().getDni(),
+                        inscripcion.getAlumno().getApellido(),
+                        inscripcion.getAlumno().getNombre()}
+                    );
+
+                }
+            }
+        } catch (NullPointerException e) {
+
+        }
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_jcbMateriasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -117,15 +158,24 @@ private DefaultTableModel modelo= new DefaultTableModel();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcbAlumnos;
+    private javax.swing.JComboBox<Materia> jcbMaterias;
     // End of variables declaration//GEN-END:variables
-   
+
     private void armarCabecera() {
-    modelo.addColumn("ID");
-    modelo.addColumn("DNI");
-    modelo.addColumn("Apellido");
-    modelo.addColumn("Nombre");
-    
-    jTable1.setModel(modelo);
-}
+        modelo.addColumn("ID");
+        modelo.addColumn("DNI");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+
+        jTable1.setModel(modelo);
+    }
+
+    private void cargarbox() {
+        MateriaData matd = new MateriaData();
+        List<Materia> Materias = matd.listarMaterias();
+        jcbMaterias.removeAllItems();
+        for (int i = 0; i < Materias.size(); i++) {
+            jcbMaterias.addItem(Materias.get(i));
+        }
+    }
 }

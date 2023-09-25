@@ -12,8 +12,10 @@ import UniversidadEjemplo.AccesoADatos.MateriaData;
 import UniversidadEjemplo.AccesoADatos.UsuarioData;
 import UniversidadEjemplo.Vistas.MenuPrincipal;
 import java.time.LocalDate;
-import java.time.Month
-        ;import java.util.List;
+import java.time.Month;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 ;
 
 /**
@@ -29,9 +31,9 @@ public class UniversidadEjemplo {
         // TODO code application logic here
         Conexion.getConexion();
 //        Alumno alum = new Alumno(1, 12, "oap", "mf", LocalDate.of(2022, Month.MARCH, 12), false);
-//        AlumnoData alumd=new AlumnoData();
+        AlumnoData alumd = new AlumnoData();
 //        alumd.modificarAlumno(alum);
-        
+
 //       Usuario usuario =new Usuario("calipto", "calipto722@gmail.com",1);
 //        UsuarioData usuariodata= new UsuarioData();
 //        usuariodata.verificarUsuario(usuario.getNombre());
@@ -40,16 +42,27 @@ public class UniversidadEjemplo {
 //    Materia materia= new Materia("Matematica", 1, true);
 //        MateriaData matd= new MateriaData();
 //        matd.guardarMateria(materia);
-    //
-    InscripcionData insd= new InscripcionData();
-    List<Materia> materias=insd.obtenerMateriasNoCursadas(7);
-    
-    for (Materia Materia1 : materias){
-        System.out.println(""+Materia1.getAnioMateria() +","+
-     + Materia1.getIdMateria()
-      +Materia1.getNombre());
+        //
+        InscripcionData insd = new InscripcionData();
+//    List<Materia> materias=insd.obtenerMateriasNoCursadas(7);
+//    
+//    for (Materia Materia1 : materias){
+//        System.out.println(""+Materia1.getAnioMateria() +","+
+//     + Materia1.getIdMateria()
+//      +Materia1.getNombre());
+//    }
+//        System.out.println(alumd.buscarAlumno(2));
+                MateriaData matd = new MateriaData();
+//               System.out.println(matd.buscarMateria(1));
+        try {
+            List<Inscripcion> inscr = insd.obtenerInscripciones();
+            for (Inscripcion inscripcion : inscr) {
+
+                System.out.println(inscripcion.getAlumno().getIdAlumno() + "");
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Inscripcion Vacia");
+        }
+
     }
-    
-    }
-    
 }

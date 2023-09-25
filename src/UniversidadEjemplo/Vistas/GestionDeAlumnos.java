@@ -24,9 +24,9 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     public GestionDeAlumnos() {
         initComponents();
         this.setTitle("Alumnos");
-        
+
     }
-    Alumno alumPrincipa=null;
+    Alumno alumPrincipa = null;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -236,39 +236,50 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         AlumnoData alumd = new AlumnoData();
- int dni = Integer.parseInt(jtDni.getText());
+        int dni = 0;
         try {
-            alumPrincipa =alumd.buscarAlumnoPorDni(dni);
-                alumPrincipa.setDni(Integer.parseInt(jtDni.getText()));
-                alumPrincipa.setApellido( jtApellido.getText());
-                alumPrincipa.setNombre(jtNombre.getText());
+              dni = Integer.parseInt(jtDni.getText());
+              alumPrincipa = alumd.buscarAlumnoPorDni(dni);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingresar Formato Correcto en Casillas");
+            jtDni.setText("");
+        }
+      
+           
+            try{
+            
+            alumPrincipa.setDni(Integer.parseInt(jtDni.getText()));
+            alumPrincipa.setApellido(jtApellido.getText());
+            alumPrincipa.setNombre(jtNombre.getText());
 
-                alumPrincipa.setFechaNac(jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            alumPrincipa.setFechaNac(jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 
-                boolean estado = false;
-                if (jrbEstado.isSelected()) {
-                    estado = true;
-                }
-                alumPrincipa.setActivo(estado);
-                
-                alumd.modificarAlumno(alumPrincipa);
-               alumPrincipa=null;
+            boolean estado = false;
+            if (jrbEstado.isSelected()) {
+                estado = true;
+            }
+            alumPrincipa.setActivo(estado);
+
+            alumd.modificarAlumno(alumPrincipa);
+            alumPrincipa = null;
 //    
         } catch (NullPointerException e) {
-                String apellido = jtApellido.getText();
-                String nombre = jtNombre.getText();
+            String apellido = jtApellido.getText();
+            String nombre = jtNombre.getText();
 
-                LocalDate fechadeNac = jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                
-                boolean estado = false;
-                        
-                if (jrbEstado.isSelected()) {
-                    estado=true;
-                }
-                Alumno alumno1 = new Alumno(dni, apellido, nombre, fechadeNac, estado);
+            LocalDate fechadeNac = jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-                alumd.guardarAlumno(alumno1);
+            boolean estado = false;
+
+            if (jrbEstado.isSelected()) {
+                estado = true;
+            }
+            Alumno alumno1 = new Alumno(dni, apellido, nombre, fechadeNac, estado);
+
+            alumd.guardarAlumno(alumno1);
 //      
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingresar Formato Correcto en Casillas");
         }
         limpiarjT();
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -280,24 +291,26 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         AlumnoData alumd = new AlumnoData();
-        int dni = Integer.parseInt(jtDni.getText());
-
-        alumPrincipa = alumd.buscarAlumnoPorDni(dni);
         try {
+             int dni = Integer.parseInt(jtDni.getText());
+             alumPrincipa = alumd.buscarAlumnoPorDni(dni);
+        } catch (NumberFormatException exception) {
+            JOptionPane.showMessageDialog(null, "Ingresar Formato Correcto en Casillas");
+        }
+        try {
+           
 
+            
             jtApellido.setText(alumPrincipa.getApellido());
             jtNombre.setText(alumPrincipa.getNombre());
             jdateFechadeNac.setDate(java.sql.Date.valueOf(alumPrincipa.getFechaNac()));
             jrbEstado.setSelected(alumPrincipa.isActivo());
 
-            
-            
         } catch (NullPointerException e) {
-            
 
-        }catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error al llenar Campos");
-            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al llenar Campos");
+
         }
 
     }//GEN-LAST:event_jbBuscarActionPerformed
@@ -305,21 +318,21 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         AlumnoData alumd = new AlumnoData();
         try {
-             alumd.eliminarAlumno(alumPrincipa.getIdAlumno());
-        limpiarjT();
+            alumd.eliminarAlumno(alumPrincipa.getIdAlumno());
+            limpiarjT();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Faltan llenar Campos");
-            
+            JOptionPane.showMessageDialog(null, "Faltan llenar Campos");
+
         }
 
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jrbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEstadoActionPerformed
-     
+
     }//GEN-LAST:event_jrbEstadoActionPerformed
 
     private void jtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDniActionPerformed
-    //alumPrincipa.setDni(Integer.parseInt(jtDni.getText()));        // TODO add your handling code here:
+        //alumPrincipa.setDni(Integer.parseInt(jtDni.getText()));        // TODO add your handling code here:
     }//GEN-LAST:event_jtDniActionPerformed
 
     private void jtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtApellidoActionPerformed

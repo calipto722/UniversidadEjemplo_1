@@ -94,7 +94,7 @@ public class MateriaData {
     }
 
     public void eliminarMateria(int id) {
-        String sql = "UPDATE materia SET estado= 0 WHERE idAlumno= ? ";
+        String sql = "UPDATE materia SET estado= 0 WHERE idMateria= ? ";
 
         try {
            PreparedStatement ps = con.prepareStatement(sql);
@@ -113,8 +113,8 @@ public class MateriaData {
     public List<Materia> listarMaterias() {
         List<Materia> materias = new ArrayList<>();
 
-        String sql = //"SELECT*FROM materia WHERE estado =1 ";
-        "SELECT*FROM materia WHERE estado =0 ";
+        String sql = "SELECT*FROM materia WHERE estado =0 OR estado =1";
+//        "SELECT*FROM materia WHERE 1 ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

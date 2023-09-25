@@ -48,7 +48,7 @@ public class AlumnoData {
     }
    public Alumno buscarAlumno (int id){
        Alumno alumno= null;
-       String sql= "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE idAlumno=? ";
+       String sql= "SELECT dni, apellido, nombre, fechaNacimiento,estado FROM alumno WHERE idAlumno=? ";
        PreparedStatement ps=null;
        
         try {
@@ -73,7 +73,7 @@ public class AlumnoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ ex.getMessage());
         }
-       
+       System.out.println(alumno);
         return alumno;
        
        
