@@ -169,7 +169,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jdateFechadeNac, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jdateFechadeNac, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
@@ -241,7 +241,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
               dni = Integer.parseInt(jtDni.getText());
               alumPrincipa = alumd.buscarAlumnoPorDni(dni);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Ingresar Formato Correcto en Casillas");
+            JOptionPane.showMessageDialog(this, "Ingresar Formato Correcto en Casillas");
             jtDni.setText("");
         }
       
@@ -279,7 +279,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             alumd.guardarAlumno(alumno1);
 //      
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Ingresar Formato Correcto en Casillas");
+            JOptionPane.showMessageDialog(this, "Ingresar Formato Correcto en Casillas");
         }
         limpiarjT();
     }//GEN-LAST:event_jbGuardarActionPerformed
@@ -295,7 +295,8 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
              int dni = Integer.parseInt(jtDni.getText());
              alumPrincipa = alumd.buscarAlumnoPorDni(dni);
         } catch (NumberFormatException exception) {
-            JOptionPane.showMessageDialog(null, "Ingresar Formato Correcto en Casillas");
+            JOptionPane.showMessageDialog(this, "Ingresar Formato Correcto en Casillas");
+            limpiarjT();
         }
         try {
            
@@ -309,7 +310,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         } catch (NullPointerException e) {
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al llenar Campos");
+            JOptionPane.showMessageDialog(this, "Error al llenar Campos");
 
         }
 
