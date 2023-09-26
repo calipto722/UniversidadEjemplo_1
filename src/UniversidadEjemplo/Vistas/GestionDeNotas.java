@@ -11,7 +11,11 @@ import UniversidadEjemplo.AccesoADatos.MateriaData;
 import UniversidadEjemplo.Entidades.Alumno;
 import UniversidadEjemplo.Entidades.Inscripcion;
 import UniversidadEjemplo.Entidades.Materia;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +35,122 @@ public class GestionDeNotas extends javax.swing.JInternalFrame {
         cargarbox();
         this.setTitle("Carga de notas");
     }
+    private List<Inscripcion> inscdelAlmno = new List<Inscripcion>() {
+        @Override
+        public int size() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public boolean isEmpty() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public Iterator<Inscripcion> iterator() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public Object[] toArray() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public <T> T[] toArray(T[] a) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public boolean add(Inscripcion e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public boolean containsAll(Collection<?> c) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public boolean addAll(Collection<? extends Inscripcion> c) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public boolean addAll(int index, Collection<? extends Inscripcion> c) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public boolean removeAll(Collection<?> c) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public boolean retainAll(Collection<?> c) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void clear() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public Inscripcion get(int index) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public Inscripcion set(int index, Inscripcion element) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void add(int index, Inscripcion element) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public Inscripcion remove(int index) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int indexOf(Object o) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int lastIndexOf(Object o) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public ListIterator<Inscripcion> listIterator() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public ListIterator<Inscripcion> listIterator(int index) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public List<Inscripcion> subList(int fromIndex, int toIndex) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,13 +182,10 @@ public class GestionDeNotas extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -144,40 +261,51 @@ public class GestionDeNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jcbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoActionPerformed
-        AlumnoData alumd = new AlumnoData();
-        MateriaData materiaData = new MateriaData();
+     
         InscripcionData inscripcionD = new InscripcionData();
         Alumno alumno = (Alumno) jcbAlumno.getSelectedItem();
 
-        List<Inscripcion> insc;
         modelo.setRowCount(0);
         try {
-            List<Materia> materiasCursadas = inscripcionD.obtenerMateriasCursadas(alumno.getIdAlumno());
-            for (Materia materiasCursada : materiasCursadas) {
-                insc = inscripcionD.obtenerInscripcionesPorMateria(materiasCursada.getIdMateria());
-                for (Inscripcion inscripcion : insc) {
-
-                    modelo.addRow(new Object[]{
-                        inscripcion.getMateria().getIdMateria(),
-                        inscripcion.getMateria().getNombre(),
-                        inscripcion.getNota()}
-                    );
-
-                }
+            inscdelAlmno= inscripcionD.obtenerInscripcionesPorAlumno(alumno.getIdAlumno());
+            
+                for (Inscripcion inscripcion : inscdelAlmno) {
+                modelo.addRow(new Object[]{
+                    inscripcion.getIdInscripcion(),
+                    inscripcion.getMateria().getNombre(),
+                    inscripcion.getNota()
+                });
             }
 
-        } catch (NullPointerException e) {
-
-        } // TODO add your handling code here:
+        } catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Formato incorrecto");
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jcbAlumnoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-//   no se como guardar la id de inscripcion para actualizar la base de dato
-//InscripcionData inscripcionData= new InscripcionData();
-//    Alumno alum =(Alumno) jcbAlumno.getSelectedItem();
-//    int filaSeleccionada= jTable1.getSelectedRow();
-//    
-//inscripcionData.actualizarInscripcion(inscripcion);// TODO add your handling code here:
+//
+        InscripcionData inscripcionData = new InscripcionData();
+        
+        int filaSeleccionada = jTable1.getSelectedRow();
+        
+        int idInscripcion = (Integer) modelo.getValueAt(filaSeleccionada, 0);
+       
+        String notaSelec = (String) modelo.getValueAt(filaSeleccionada, 2);
+        int notaSelec1 = Integer.parseInt(notaSelec);
+
+        MateriaData materiaData = new MateriaData();
+        // tengo que buscar id de inscripcion por materia??
+        
+        for (Inscripcion inscripcionnueva : inscdelAlmno) {
+            if (inscripcionnueva.getIdInscripcion()==idInscripcion) {
+
+                inscripcionnueva.setNota(notaSelec1);
+               
+                inscripcionData.actualizarInscripcion(inscripcionnueva);
+            }
+        }
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_jbGuardarActionPerformed
 
 
@@ -192,7 +320,7 @@ public class GestionDeNotas extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Alumno> jcbAlumno;
     // End of variables declaration//GEN-END:variables
 private void armarCabecera() {
-        modelo.addColumn("Codigo");
+        modelo.addColumn("IdInscripcion");
         modelo.addColumn("Nombre");
         modelo.addColumn("Nota");
 

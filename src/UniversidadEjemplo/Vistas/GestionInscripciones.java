@@ -225,7 +225,7 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
         MateriaData matd= new MateriaData();
         Alumno alum = (Alumno) jcbAlumno.getSelectedItem();
         List<Materia> Materias;
-        List<Materia> Materias1= matd.listarMaterias();
+        
         try{
             Materias= inscripcionD.obtenerMateriasCursadas(alum.getIdAlumno());
              modelo.setRowCount(0);
