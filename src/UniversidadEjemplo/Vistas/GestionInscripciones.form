@@ -210,6 +210,7 @@
         <Component class="javax.swing.JButton" name="jbInscribir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Inscribir"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbInscribirActionPerformed"/>
@@ -218,6 +219,7 @@
         <Component class="javax.swing.JButton" name="jbAnularInscripcion">
           <Properties>
             <Property name="text" type="java.lang.String" value="Anular Inscripcion"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAnularInscripcionActionPerformed"/>
