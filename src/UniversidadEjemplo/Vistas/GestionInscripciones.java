@@ -228,7 +228,7 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
         jbInscribir.setEnabled(false);
 
         InscripcionData inscripcionD = new InscripcionData();
-        MateriaData matd = new MateriaData();
+       
         Alumno alum = (Alumno) jcbAlumno.getSelectedItem();
         List<Materia> Materias;
 
@@ -342,7 +342,7 @@ public class GestionInscripciones extends javax.swing.JInternalFrame {
     }
    private void borrarFilaTabla(){
        int indice= jTable1.getSelectedRow();
-      // for (int i= indice;i>=0;i--){
+     
           if (indice == -1) {
             JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {

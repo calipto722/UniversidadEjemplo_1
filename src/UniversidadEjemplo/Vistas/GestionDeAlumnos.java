@@ -250,6 +250,7 @@ AlumnoData alumd = new AlumnoData();
         }
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Por favor, ingrese un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        limpiarjT();
     }
 
     if (exito) {
