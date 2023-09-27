@@ -50,11 +50,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 651, Short.MAX_VALUE)
+            .addGap(0, 813, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
+            .addGap(0, 573, Short.MAX_VALUE)
         );
 
         jmAlumno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/klipartz.com (12).png"))); // NOI18N
@@ -125,6 +125,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/klipartz.com (19).png"))); // NOI18N
         jMenuItem1.setText("CerrarAplicacion");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

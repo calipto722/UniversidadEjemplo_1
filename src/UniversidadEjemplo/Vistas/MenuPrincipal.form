@@ -97,6 +97,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagenes/klipartz.com (19).png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="CerrarAplicacion"/>
               </Properties>
               <Events>
@@ -154,12 +157,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="651" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="813" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="539" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="573" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
