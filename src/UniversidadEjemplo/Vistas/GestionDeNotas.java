@@ -283,29 +283,70 @@ public class GestionDeNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbAlumnoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+
+//        try{
+//        InscripcionData inscripcionData = new InscripcionData();
+//        
+//       // int filaSeleccionada = jTable1.getSelectedRow();
+//            for (int i = 0; i <modelo.getRowCount(); i++) {
+//                
+//            
+//        
+//        int idInscripcion = (Integer) modelo.getValueAt(i, 0);
+//       
+//        String notaSelec = (String) modelo.getValueAt(i, 2);
+//        int notaSelec1 = Integer.parseInt(notaSelec);
 //
+////        MateriaData materiaData = new MateriaData();
+////        // tengo que buscar id de inscripcion por materia??
+//        
+//        for (Inscripcion inscripcionnueva : inscdelAlmno) {
+//            if (inscripcionnueva.getIdInscripcion()==idInscripcion && inscripcionnueva.getNota()!=notaSelec1) {
+//
+//                inscripcionnueva.setNota(notaSelec1);
+//               
+//                inscripcionData.actualizarInscripcion(inscripcionnueva);
+//            }
+//        }
+//            }
+//    
+//    }catch(NumberFormatException nfe){
+//        JOptionPane.showMessageDialog(this, "Formato incorrecto" + nfe);
+//    }catch (Exception e){
+//       // JOptionPane.showMessageDialog(this, "Modifique la nota antes de guardar ");
+//    }
+         try {
         InscripcionData inscripcionData = new InscripcionData();
-        
-        int filaSeleccionada = jTable1.getSelectedRow();
-        
-        int idInscripcion = (Integer) modelo.getValueAt(filaSeleccionada, 0);
-       
-        String notaSelec = (String) modelo.getValueAt(filaSeleccionada, 2);
-        int notaSelec1 = Integer.parseInt(notaSelec);
+        int[] filasSeleccionadas = jTable1.getSelectedRows();
 
-        MateriaData materiaData = new MateriaData();
-        // tengo que buscar id de inscripcion por materia??
-        
-        for (Inscripcion inscripcionnueva : inscdelAlmno) {
-            if (inscripcionnueva.getIdInscripcion()==idInscripcion) {
+        if (filasSeleccionadas.length > 0) {
+            for (int fila : filasSeleccionadas) {
+                int idInscripcion = (Integer) modelo.getValueAt(fila, 0);
+                String notaSelec = (String) modelo.getValueAt(fila, 2);
 
-                inscripcionnueva.setNota(notaSelec1);
-               
-                inscripcionData.actualizarInscripcion(inscripcionnueva);
+                if (esNotaValida(notaSelec)) {
+                    int notaSelec1 = Integer.parseInt(notaSelec);
+
+                    for (Inscripcion inscripcionNueva : inscdelAlmno) {
+                        if (inscripcionNueva.getIdInscripcion() == idInscripcion) {
+                            inscripcionNueva.setNota(notaSelec1);
+                            inscripcionData.actualizarInscripcion(inscripcionNueva);
+                            break; // Salir del bucle una vez que se haya actualizado una fila
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Formato de nota incorrecto en la fila " + (fila + 1) + ". Ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
-        }
 
-        // TODO add your handling code here:
+            JOptionPane.showMessageDialog(this, "Notas actualizadas con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione al menos una fila para cambiar la nota.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocurrió un error al guardar las notas. Modifique la nota antes de guardar.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
 
@@ -336,4 +377,13 @@ private void armarCabecera() {
             jcbAlumno.addItem(Alumnos.get(i));
         }
     }
+private boolean esNotaValida(String nota) {
+    try {
+        int notaValue = Integer.parseInt(nota);
+        return true;
+    } catch (NumberFormatException e) {
+        return false;
+    }
+
+}
 }

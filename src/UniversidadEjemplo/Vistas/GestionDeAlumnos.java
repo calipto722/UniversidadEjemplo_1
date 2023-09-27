@@ -235,53 +235,27 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        AlumnoData alumd = new AlumnoData();
-        int dni = 0;
-        try {
-              dni = Integer.parseInt(jtDni.getText());
-              alumPrincipa = alumd.buscarAlumnoPorDni(dni);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Ingresar Formato Correcto en Casillas");
-            jtDni.setText("");
+
+AlumnoData alumd = new AlumnoData();
+    boolean exito = false;
+
+    try {
+        int dni = Integer.parseInt(jtDni.getText());
+        Alumno alumno = alumd.buscarAlumnoPorDni(dni);
+
+        if (alumno == null) {
+            exito = guardarAlumno(alumd, dni);
+        } else {
+            exito = modificarAlumno(alumno);
         }
-      
-           
-            try{
-            
-            alumPrincipa.setDni(Integer.parseInt(jtDni.getText()));
-            alumPrincipa.setApellido(jtApellido.getText());
-            alumPrincipa.setNombre(jtNombre.getText());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
-            alumPrincipa.setFechaNac(jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-
-            boolean estado = false;
-            if (jrbEstado.isSelected()) {
-                estado = true;
-            }
-            alumPrincipa.setActivo(estado);
-
-            alumd.modificarAlumno(alumPrincipa);
-            alumPrincipa = null;
-//    
-        } catch (NullPointerException e) {
-            String apellido = jtApellido.getText();
-            String nombre = jtNombre.getText();
-
-            LocalDate fechadeNac = jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-            boolean estado = false;
-
-            if (jrbEstado.isSelected()) {
-                estado = true;
-            }
-            Alumno alumno1 = new Alumno(dni, apellido, nombre, fechadeNac, estado);
-
-            alumd.guardarAlumno(alumno1);
-//      
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Ingresar Formato Correcto en Casillas");
-        }
+    if (exito) {
         limpiarjT();
+    }
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
@@ -377,4 +351,36 @@ private void limpiarjT() {
         jrbEstado.setEnabled(true);
         jtNombre.setEnabled(true);
     }
+  private boolean guardarAlumno(AlumnoData alumd, int dni) {
+    try {
+        String apellido = jtApellido.getText();
+        String nombre = jtNombre.getText();
+        LocalDate fechadeNac = jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        boolean estado = jrbEstado.isSelected();
+
+        Alumno alumno = new Alumno(dni, apellido, nombre, fechadeNac, estado);
+        alumd.guardarAlumno(alumno);
+
+        return true;
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese valores válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+}
+  private boolean modificarAlumno(Alumno alumno) {
+    try {
+        alumno.setApellido(jtApellido.getText());
+        alumno.setNombre(jtNombre.getText());
+        alumno.setFechaNac(jdateFechadeNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        alumno.setActivo(jrbEstado.isSelected());
+
+        AlumnoData alumd = new AlumnoData();
+        alumd.modificarAlumno(alumno);
+
+        return true;
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Ha ocurrido un error al modificar el alumno.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+}
 }

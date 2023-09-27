@@ -235,9 +235,10 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         MateriaData matd = new MateriaData();
-        int codigo = Integer.parseInt(jtCodigo.getText());
+//        int codigo = Integer.parseInt(jtCodigo.getText());
 
         try {
+            int codigo = Integer.parseInt(jtCodigo.getText());
             matPrincipal = matd.buscarMateria(codigo);
             matPrincipal.setNombre(jtNombre.getText());
             boolean estado = false;
@@ -262,7 +263,10 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
                 }
                 Materia materia=new Materia(nombre,año, estado);
                 matd.guardarMateria(materia);
+        } catch(NumberFormatException nfe){
+            JOptionPane.showMessageDialog(this, "Complete el campo correctamente " + nfe.getMessage());
         }
+        
      limpiarjT();   // TODO add your handling code here:
     }//GEN-LAST:event_jbGuardarActionPerformed
 
