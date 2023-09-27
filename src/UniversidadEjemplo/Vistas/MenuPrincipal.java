@@ -50,13 +50,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+            .addGap(0, 651, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 569, Short.MAX_VALUE)
+            .addGap(0, 539, Short.MAX_VALUE)
         );
 
+        jmAlumno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/klipartz.com (12).png"))); // NOI18N
         jmAlumno.setText("Alumno");
 
         jmiFormularioAlumno.setText("Formulario de Alumno");
@@ -69,6 +70,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmAlumno);
 
+        jmMateria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/klipartz.com (13).png"))); // NOI18N
         jmMateria.setText("Materia");
 
         jmiFormularioMateria.setText("Formulario de Materia");
@@ -81,6 +83,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmMateria);
 
+        jmAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/klipartz.com (14).png"))); // NOI18N
         jmAdministracion.setText("Administración");
 
         jmiManejoInscripciones.setText("Manejo de Inscripciones");
@@ -101,6 +104,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmAdministracion);
 
+        jmConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/klipartz.com (15).png"))); // NOI18N
         jmConsultas.setText("Consultas");
 
         jmiAlumnosporMateria.setText("Alumnos por Materia");
@@ -113,6 +117,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmConsultas);
 
+        jmSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/klipartz.com (16).png"))); // NOI18N
         jmSalir.setText("Salir");
         jmSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

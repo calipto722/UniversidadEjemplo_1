@@ -75,7 +75,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jLabel2" pref="82" max="32767" attributes="0"/>
+                                  <Component id="jLabel2" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -87,7 +87,9 @@
                               <Component id="jtUsuario" pref="210" max="32767" attributes="0"/>
                               <Component id="jPassword" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jVista" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -112,8 +114,13 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel5" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="jLabel5" pref="39" max="32767" attributes="0"/>
                       <Component id="jPassword" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <Component id="jVista" min="-2" pref="23" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -153,7 +160,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/UniversidadEjemplo/Vistas/klipartz.com (1)_1.png"/>
+              <Image iconType="3" name="/Imagenes/klipartz.com (1)_1.png"/>
             </Property>
           </Properties>
         </Component>
@@ -208,7 +215,7 @@
               <Font name="Verdana" size="11" style="2"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/UniversidadEjemplo/Vistas/klipartz.com (2).png"/>
+              <Image iconType="3" name="/Imagenes/klipartz.com (2).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="@Universidad ULP"/>
           </Properties>
@@ -216,6 +223,20 @@
         <Component class="javax.swing.JPasswordField" name="jPassword">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPasswordActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jVista">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/klipartz.com (9).png"/>
+            </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+            <Property name="borderPainted" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jVistaActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
