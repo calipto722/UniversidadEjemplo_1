@@ -86,6 +86,9 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmSalir">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/klipartz.com (16).png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
@@ -94,9 +97,6 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Imagenes/klipartz.com (19).png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="CerrarAplicacion"/>
               </Properties>
               <Events>
