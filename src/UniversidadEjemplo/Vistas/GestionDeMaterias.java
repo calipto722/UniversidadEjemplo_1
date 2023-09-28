@@ -238,34 +238,41 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
 //        int codigo = Integer.parseInt(jtCodigo.getText());
 
         try {
-            int codigo = Integer.parseInt(jtCodigo.getText());
-            matPrincipal = matd.buscarMateria(codigo);
-            matPrincipal.setNombre(jtNombre.getText());
-            boolean estado = false;
-                if (jrEstado.isSelected()) {
-                    estado = true;
-                }
-                matPrincipal.setActivo(estado);
-            
-                matPrincipal.setAnioMateria(Integer.parseInt(jtaño.getText()));
-               
+        int codigo = Integer.parseInt(jtCodigo.getText());
+        matPrincipal = matd.buscarMateria(codigo);
+
+        matPrincipal.setNombre(jtNombre.getText());
+
+        boolean estado = jrEstado.isSelected();
+        matPrincipal.setActivo(estado);
+
+        int año = Integer.parseInt(jtaño.getText());
+        matPrincipal.setAnioMateria(año);
+
         matd.modificarMateria(matPrincipal);
-        matPrincipal=null;
-        
-        } catch (NullPointerException e) {
-            
+        matPrincipal = null;
+
+        JOptionPane.showMessageDialog(this, "Materia modificada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    } catch (NumberFormatException nfe) {
+        JOptionPane.showMessageDialog(this, "Ingrese un valor numérico válido para el código y el año.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (NullPointerException e) {
+        try {
             String nombre = jtNombre.getText();
-                int año = Integer.parseInt(jtaño.getText());
-                boolean estado = false;
-                        
-                if (jrEstado.isSelected()) {
-                    estado=true;
-                }
-                Materia materia=new Materia(nombre,año, estado);
-                matd.guardarMateria(materia);
-        } catch(NumberFormatException nfe){
-            JOptionPane.showMessageDialog(this, "Complete el campo correctamente " + nfe.getMessage());
+            int año = Integer.parseInt(jtaño.getText());
+            boolean estado = jrEstado.isSelected();
+
+            Materia materia = new Materia(nombre, año, estado);
+            matd.guardarMateria(materia);
+
+            JOptionPane.showMessageDialog(this, "Materia guardada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "Ingrese un valor numérico válido para el año.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al guardar la materia.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+  
         
      limpiarjT();   // TODO add your handling code here:
     }//GEN-LAST:event_jbGuardarActionPerformed
