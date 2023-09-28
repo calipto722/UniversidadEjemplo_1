@@ -251,6 +251,8 @@ AlumnoData alumd = new AlumnoData();
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Por favor, ingrese un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
         limpiarjT();
+    } catch(NullPointerException np){
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese fecha valida ", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     if (exito) {
@@ -383,5 +385,6 @@ private void limpiarjT() {
         JOptionPane.showMessageDialog(this, "Ha ocurrido un error al modificar el alumno.", "Error", JOptionPane.ERROR_MESSAGE);
         return false;
     }
+    
 }
 }
