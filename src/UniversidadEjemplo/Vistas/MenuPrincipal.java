@@ -117,7 +117,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmConsultas);
 
-        jmSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/klipartz.com (16).png"))); // NOI18N
         jmSalir.setText("Salir");
         jmSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
